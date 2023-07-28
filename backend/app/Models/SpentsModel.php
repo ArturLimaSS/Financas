@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class SpentsModel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'value',
+        'reason',
+        'user_id',
+        'status',
+    ];
+
+    protected $casts = [
+        'value' => 'decimal:2',
+    ];
 }
