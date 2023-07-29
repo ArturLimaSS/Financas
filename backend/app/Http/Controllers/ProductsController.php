@@ -10,8 +10,8 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $producs = ProductModel::all();
-        return response()->json($producs);
+        $products = ProductModel::all();
+        return response()->json($products);
     }
 
     public function store(Request $request)
@@ -25,5 +25,18 @@ class ProductsController extends Controller
         $product = ProductModel::create($data);
         $success = array('message' => 'Produto Inserido com Sucesso!', "data" => $product);
         return response()->json($success, 201);
+    }
+
+    public function update(Request $request, ProductModel $product)
+    {
+        $data = $request->validate(([
+            "name"=>"string",
+            "value"=>"numeric",
+            "status"=>"numeric"
+        ]));
+
+        $product ->update($data);
+        return response()->json($product);
+
     }
 }

@@ -20,6 +20,7 @@ class SpentsController extends Controller
             'title' => 'required|string|max:100',
             'value' => 'required|numeric',
             'reason' => 'nullable|string|max:255',
+            'products' => 'nullable|json',
             'user_id' => 'numeric'
         ]);
 
@@ -29,8 +30,9 @@ class SpentsController extends Controller
 
     }
 
-    public function show(SpentsModel $spent)
-    {
+    public function show($id)
+    {   
+        $spent = SpentsModel::findOrFail($id);
         return response()->json($spent);
     }
 
@@ -40,6 +42,7 @@ class SpentsController extends Controller
         $data = $request->validate([
             'title' => 'string|max:100',
             'value' => 'numeric',
+            'products' => 'nullable|json',
             'reason' => 'nullable|string|max:255',
             'status' => 'in:0,1',
         ]);
