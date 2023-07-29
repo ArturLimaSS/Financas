@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SpentsModel extends Model
 {
     use HasFactory;
-
+    protected $table = 'tb_spents';
     protected $fillable = [
         'title',
         'value',

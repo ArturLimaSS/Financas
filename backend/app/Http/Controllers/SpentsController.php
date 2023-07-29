@@ -16,14 +16,16 @@ class SpentsController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validade([
+        $data = $request->validate([
             'title' => 'required|string|max:100',
             'value' => 'required|numeric',
-            'reason' => 'nullable|string|max:255'
+            'reason' => 'nullable|string|max:255',
+            'user_id' => 'numeric'
         ]);
 
         $spent = SpentsModel::create($data);
-        return response()->json($spent, 201);
+        $sucesso = array('message'=> 'Gasto inserido com sucesso!', "data" => $spent);
+        return response()->json($sucesso, 201);
 
     }
 
