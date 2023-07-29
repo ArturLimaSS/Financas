@@ -38,10 +38,10 @@ class SpentsController extends Controller
     {
 
         $data = $request->validate([
-            'title' => 'required|string|max:100',
-            'value' => 'required|numeric',
+            'title' => 'string|max:100',
+            'value' => 'numeric',
             'reason' => 'nullable|string|max:255',
-            'status' => 'required|in:0,1',
+            'status' => 'in:0,1',
         ]);
 
         $spent->update($data);
