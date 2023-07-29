@@ -41,6 +41,36 @@ class UserController extends Controller
         return response()->json(['message' => 'Usuário criado com sucesso!', 'data' => $user], 201);
     }
 
+    public function storeBulk(Request $request)
+{
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:8',
+    ]);
+
+    $data['password'] = Hash::make($data['password']);
+    $createdUsers = [];
+
+    // Loop through the input data and create users
+    foreach ($request->all() as $userData) {
+        $user = User::create([
+            'name' => $userData['name'],
+            'email' => $userData['email'],
+            'password' => Hash::make($userData['password']),
+        ]);
+
+        // Add the created user to the array
+        $createdUsers[] = $user;
+    };
+
+    return response()->json([
+        'message' => 'Usuários criados com sucesso!',
+        'data' => $createdUsers,
+    ], 201);
+}
+
+
     /**
      * Display the specified resource.
      *
