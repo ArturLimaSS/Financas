@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductModel;
 
 class SpentsModel extends Model
 {
@@ -21,4 +22,9 @@ class SpentsModel extends Model
     protected $casts = [
         'value' => 'decimal:2',
     ];
+
+    public function relationatedProducts()
+    {
+        return ProductModel::whereIn('id', json_decode($this->products))->get();
+    }
 }

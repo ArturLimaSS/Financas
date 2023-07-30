@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_spents', function (Blueprint $table) {
+        Schema::create('tb_spent_products', function (Blueprint $table) {
             $table->id();
-            $table->char('title', 100);
-            $table->decimal('value', 10, 2)->nullable();
-            $table->string('reason')->nullable();
-            $table->integer('user_id');
+            $table->integer('spent');
+            $table->integer('product')->nullable();
             $table->timestamps();
             $table->enum('status', ['0','1'])->default('1');
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_gastos');
+        Schema::dropIfExists('tb_spent_products');
     }
 };

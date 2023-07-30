@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SpentsModel;
+use App\Models\ProductModel;
+use Illuminate\Support\Facades\DB;
+
 
 class SpentsController extends Controller
 {
     public function index()
     {
-        $spents = SpentsModel::all();
-        return response()->json($spents);
+        try {
+            $spentsWithProducts = SpentsModel::join('tb_spent_products', 'tb_spents.id', '=', 'tb_spent_products.spent')
+                ->join('tb_products', 'tb_spent_products.product', '=', 'tb_products.id')
+                ->select('tb_spents.title', 'tb_spent.reason', 'tb_spents.value', 'tb_products.name as products')
+                ->get();
+
+            return response()->json($spentsWithProducts);
+        } catch (\Exception $e) {
+            // Capturar e registrar qualquer exceção gerada pela consulta
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
@@ -25,13 +37,12 @@ class SpentsController extends Controller
         ]);
 
         $spent = SpentsModel::create($data);
-        $sucesso = array('message'=> 'Gasto inserido com sucesso!', "data" => $spent);
+        $sucesso = array('message' => 'Gasto inserido com sucesso!', "data" => $spent);
         return response()->json($sucesso, 201);
-
     }
 
     public function show($id)
-    {   
+    {
         $spent = SpentsModel::findOrFail($id);
         return response()->json($spent);
     }

@@ -9,6 +9,7 @@ import RecentTransactions from './components/RecentTransactions';
 import ProductPerformance from './components/ProductPerformance';
 import Blog from './components/Blog';
 import MonthlyEarnings from './components/MonthlyEarnings';
+import { LastSpents } from './components/LastSpents';
 
 
 const Dashboard = () => {
@@ -30,7 +31,7 @@ const Dashboard = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} lg={12}>
-            <RecentTransactions />
+            <LastSpents />
           </Grid>
           <Grid item xs={12} lg={12}>
             <ProductPerformance />
