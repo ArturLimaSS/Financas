@@ -18,7 +18,7 @@ Route::get('/spents', [SpentsController::class, 'index']);
 Route::get('/spents/spent/{id}', [SpentsController::class, 'show']);
 Route::post('/spents/create', [SpentsController::class, 'store']);
 Route::post('/spents/update/{spent}', [SpentsController::class, 'update']);
-Route::post('/spents/test');
+Route::get('/spents/date', [SpentsController::class, 'getDataToChart']);
 
 //Products RoutesQ
 Route::get('/products', [ProductsController::class, 'index']);

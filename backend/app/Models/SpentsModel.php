@@ -27,4 +27,10 @@ class SpentsModel extends Model
     {
         return ProductModel::whereIn('id', json_decode($this->products))->get();
     }
+
+    public function getSumTotalSpents()
+    {
+        return $this->sum('value');
+    }
+
 }

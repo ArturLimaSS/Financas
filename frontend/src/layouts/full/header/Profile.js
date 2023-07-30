@@ -69,7 +69,11 @@ const Profile = () => {
           <ListItemIcon>
             <IconUser width={20} />
           </ListItemIcon>
-          <ListItemText>My Profile</ListItemText>
+          <ListItemText>
+            <Link to={'/user'} style={{ textDecoration: 'none', color: 'black' }}>
+              Meu Perfil
+            </Link>
+          </ListItemText>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

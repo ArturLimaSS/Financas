@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import { IconArrowUpLeft } from '@tabler/icons';
+import { apiService } from 'src/api/api';
 
 import DashboardCard from '../../../components/shared/DashboardCard';
 
 const YearlyBreakup = () => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    apiService.getSpents()
+      .then((response) => {
+        console.log(response.data)
+        const totalSpents = response.data.reduce((acc, curr) => acc + parseFloat(curr.value), 0);
+        setTotal(totalSpents)
+      })
+  }, [])
+
   // chart color
   const theme = useTheme();
   const primary = theme.palette.primary.main;
@@ -62,12 +74,12 @@ const YearlyBreakup = () => {
   const seriescolumnchart = [38, 40, 25];
 
   return (
-    <DashboardCard title="Yearly Breakup">
+    <DashboardCard title="Total Gasto">
       <Grid container spacing={3}>
         {/* column */}
         <Grid item xs={7} sm={7}>
           <Typography variant="h3" fontWeight="700">
-            $36,358
+            {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </Typography>
           <Stack direction="row" spacing={1} mt={1} alignItems="center">
             <Avatar sx={{ bgcolor: successlight, width: 27, height: 27 }}>
@@ -109,6 +121,7 @@ const YearlyBreakup = () => {
           />
         </Grid>
       </Grid>
+
     </DashboardCard>
   );
 };

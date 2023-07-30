@@ -1,6 +1,7 @@
 import {
   IconAperture, IconCopy, IconLayoutDashboard, IconLogin, IconMoodHappy, IconTypography, IconUserPlus
 } from '@tabler/icons';
+import PersonIcon from '@mui/icons-material/Person';
 
 import { uniqueId } from 'lodash';
 
@@ -64,6 +65,13 @@ const Menuitems = [
     icon: IconAperture,
     href: '/sample-page',
   },
+  {
+    id: uniqueId(),
+    title: "User",
+    icon: PersonIcon,
+    href: '/user'
+
+  }
 ];
 
 export default Menuitems;

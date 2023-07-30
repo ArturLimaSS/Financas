@@ -6,7 +6,7 @@ const instance = axios.create({
 
 export const apiService = {
     getAllUsers: () => {
-        return instance.get('/users')
+        return instance.get('/users');
     },
 
     getUser: () => {
@@ -14,7 +14,11 @@ export const apiService = {
     },
 
     getSpents: () => {
-        return instance.get('/spents')
+        return instance.get('/spents');
+    },
+
+    getDataToChart: () => {
+        return instance.get('/spents/date');
     }
 
 }

@@ -13,15 +13,17 @@ class SpentsController extends Controller
 {
     public function index()
     {
+        $spentsmodel = new SpentsModel();
         try {
-            $spentsWithProducts = SpentsModel::join('tb_spent_products', 'tb_spents.id', '=', 'tb_spent_products.spent')
-                ->join('tb_products', 'tb_spent_products.product', '=', 'tb_products.id')
-                ->select('tb_spents.title', 'tb_spent.reason', 'tb_spents.value', 'tb_products.name as products')
+            // A consulta abaixo está usando Eloquent para realizar a junção (join) entre as tabelas.
+            $spentsWithProducts = SpentsModel::leftJoin('tb_spent_products', 'tb_spents.id', '=', 'tb_spent_products.spent')
+                ->leftJoin('tb_products', 'tb_spent_products.product', '=', 'tb_products.id')
+                ->select('tb_spents.title', 'tb_spents.reason', 'tb_spents.value', 'tb_products.name as products')
                 ->get();
 
             return response()->json($spentsWithProducts);
+
         } catch (\Exception $e) {
-            // Capturar e registrar qualquer exceção gerada pela consulta
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
@@ -60,5 +62,15 @@ class SpentsController extends Controller
 
         $spent->update($data);
         return response()->json($spent);
+    }
+
+    public function getDataToChart()
+    {
+        $results = SpentsModel::selectRaw('DATE(created_at) AS date_only, SUM(VALUE) AS total_spents')
+                ->groupBy('date_only')
+                ->orderBy('date_only', 'DESC')
+                ->limit('5')
+                ->get();
+        return response()->json($results);
     }
 }

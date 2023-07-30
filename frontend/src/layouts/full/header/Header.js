@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
 import PropTypes from 'prop-types';
-
+import NewSpentModal from 'src/views/dashboard/components/NewSpentModal';
 // components
 import Profile from './Profile';
 import { IconBellRinging, IconMenu } from '@tabler/icons';
@@ -63,9 +63,8 @@ const Header = (props) => {
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button variant="contained" color="primary" href="#">
-            Novo Gasto
-          </Button>
+        <NewSpentModal />
+          
           <Profile />
         </Stack>
       </ToolbarStyled>

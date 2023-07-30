@@ -9,10 +9,14 @@ export const LastSpents = () => {
         apiService.getSpents()
             .then((response) => {
                 console.log(response.data);
-                setSpents(response.data);
+                const spentsWithNumbers = response.data.map(spent => ({
+                    ...spent,
+                    value: parseFloat(spent.value)
+                }) )
+                setSpents(spentsWithNumbers);
             })
             .catch((error) => console.error(error));
-    })
+    }, [])
 
     return (
         <DashboardCard title={"Ultimos Gastos"}>
@@ -62,7 +66,7 @@ export const LastSpents = () => {
                                 </TableCell>
                                 <TableCell>
                                     <Typography>
-                                        {spent.value}
+                                        {spent.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                     </Typography>
                                 </TableCell>
                             </TableRow>

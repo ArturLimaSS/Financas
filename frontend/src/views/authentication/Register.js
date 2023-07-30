@@ -38,11 +38,7 @@ const Register2 = () => (
               <Logo />
             </Box>
             <AuthRegister
-              subtext={
-                <Typography variant="subtitle1" textAlign="center" color="textSecondary" mb={1}>
-                  Your Social Campaigns
-                </Typography>
-              }
+              
               subtitle={
                 <Stack direction="row" justifyContent="center" spacing={1} mt={3}>
                   <Typography color="textSecondary" variant="h6" fontWeight="400">

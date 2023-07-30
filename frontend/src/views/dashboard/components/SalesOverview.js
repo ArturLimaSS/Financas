@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select, MenuItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import DashboardCard from '../../../components/shared/DashboardCard';
 import Chart from 'react-apexcharts';
+import { apiService } from 'src/api/api';
 
 
 const SalesOverview = () => {
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        apiService.getDataToChart()
+            .then((response) => {
+                setData(response.data);
+            })
+    }, [])
 
     // select
     const [month, setMonth] = React.useState('1');
@@ -13,6 +22,15 @@ const SalesOverview = () => {
     const handleChange = (event) => {
         setMonth(event.target.value);
     };
+
+    const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    const datas = data.map((data) => data.date_only);
+
+    // Convertendo os valores de gastos para números antes de formatá-los
+    const values = data.map((value) => Number(value.total_spents));
+
+
 
     // chart color
     const theme = useTheme();
@@ -47,7 +65,7 @@ const SalesOverview = () => {
             width: 5,
             lineCap: "butt",
             colors: ["transparent"],
-          },
+        },
         dataLabels: {
             enabled: false,
         },
@@ -67,7 +85,7 @@ const SalesOverview = () => {
             tickAmount: 4,
         },
         xaxis: {
-            categories: ['16/08', '17/08', '18/08', '19/08', '20/08', '21/08', '22/08', '23/08'],
+            categories: datas.reverse(),
             axisBorder: {
                 show: false,
             },
@@ -79,18 +97,14 @@ const SalesOverview = () => {
     };
     const seriescolumnchart = [
         {
-            name: 'Eanings this month',
-            data: [355, 390, 300, 350, 390, 180, 355, 390],
-        },
-        {
-            name: 'Expense this month',
-            data: [280, 250, 325, 215, 250, 310, 280, 250],
-        },
+            name: 'Gastos neste dia',
+            data: values.reverse(),
+        }
     ];
 
     return (
 
-        <DashboardCard title="Sales Overview" action={
+        <DashboardCard title="Visão Geral de Gastos" action={
             <Select
                 labelId="month-dd"
                 id="month-dd"
