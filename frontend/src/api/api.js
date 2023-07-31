@@ -19,6 +19,10 @@ export const apiService = {
 
     getDataToChart: () => {
         return instance.get('/spents/date');
+    },
+
+    postSpents: (data) => {
+        return instance.post('/spents/create', data)
     }
 
 }
