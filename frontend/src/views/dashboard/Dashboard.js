@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Box } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 
@@ -10,11 +10,19 @@ import ProductPerformance from './components/ProductPerformance';
 import Blog from './components/Blog';
 import MonthlyEarnings from './components/MonthlyEarnings';
 import { LastSpents } from './components/LastSpents';
-
+import NewSpentModal from './components/NewSpentModal';
 
 const Dashboard = () => {
+
+  const [updateRecentTransactions, setUpdateRecentTransactions] = useState(false);
+
+  const handleFormSubmit = () => {
+    setUpdateRecentTransactions(true); // Defina a prop "updateRecentTransactions" como true quando o formulário for enviado
+  };
+
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
+      
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={8}>
@@ -31,7 +39,7 @@ const Dashboard = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} lg={12}>
-            <LastSpents />
+            <LastSpents update={updateRecentTransactions} />
           </Grid>
           <Grid item xs={12} lg={12}>
             <ProductPerformance />
@@ -39,6 +47,7 @@ const Dashboard = () => {
           <Grid item xs={12}>
             <Blog />
           </Grid>
+
         </Grid>
       </Box>
     </PageContainer>

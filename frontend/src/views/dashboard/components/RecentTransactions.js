@@ -14,18 +14,21 @@ import { Link, Typography } from '@mui/material';
 import { apiService } from 'src/api/api';
 
 
-const RecentTransactions = () => {
+const RecentTransactions = ({ update }) => {
 
   const [spents, setSpents] = useState([]);
 
   useEffect(() => {
-    apiService.getSpents()
-      .then((response) => {
-        console.log("Dados da API:", response.data); // Verifique os dados retornados pela API
-        setSpents(response.data);
-      })
-      .catch((error) => console.error("Erro", error))
-  }, [])
+    if (update) {
+      // Se a prop "update" for true, faça a requisição para obter os gastos recentes
+      apiService.getSpents()
+        .then((response) => {
+          console.log("Dados da API:", response.data); // Verifique os dados retornados pela API
+          setSpents(response.data);
+        })
+        .catch((error) => console.error("Erro", error))
+    }
+  }, [update]);
 
   return (
     <DashboardCard title="Gastos Recentes">

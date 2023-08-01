@@ -39,7 +39,7 @@ class SpentsController extends Controller
         ]);
 
         $spent = SpentsModel::create($data);
-        $sucesso = array('message' => 'Gasto inserido com sucesso!', "data" => $spent);
+        $sucesso = array('status' => 'success', 'title' => 'Gasto inserido com sucesso!', "data" => $spent);
         return response()->json($sucesso, 201);
     }
 

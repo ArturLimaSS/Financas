@@ -12,7 +12,7 @@ export const LastSpents = () => {
                 const spentsWithNumbers = response.data.map(spent => ({
                     ...spent,
                     value: parseFloat(spent.value)
-                }) )
+                }))
                 setSpents(spentsWithNumbers);
             })
             .catch((error) => console.error(error));
@@ -34,11 +34,11 @@ export const LastSpents = () => {
                                     Motivo
                                 </Typography>
                             </TableCell>
-                            <TableCell>
+                            {/* <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Produtos
                                 </Typography>
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Total Gasto
@@ -59,11 +59,11 @@ export const LastSpents = () => {
                                         {spent.reason}
                                     </Typography>
                                 </TableCell>
-                                <TableCell>
+                                {/* <TableCell>
                                     <Typography>
                                         {spent.products}
                                     </Typography>
-                                </TableCell>
+                                </TableCell> */}
                                 <TableCell>
                                     <Typography>
                                         {spent.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}

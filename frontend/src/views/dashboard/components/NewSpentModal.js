@@ -8,7 +8,8 @@ import { InputBase } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { apiService } from 'src/api/api';
 
 const modalStyle = {
@@ -23,10 +24,13 @@ const modalStyle = {
     p: 4,
 };
 
+const CustomAlert = withReactContent(Swal);
+
 export default function NewSpentModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [alertContent, setAlertContent] = React.useState('');
 
     const [currencyInput, setCurrencyInput] = React.useState('');
 
@@ -53,12 +57,23 @@ export default function NewSpentModal() {
         const data = {
             'title': event.target[0].value,
             'reason': event.target[2].value,
-            'value': cleanedValue,
+            'value': parseFloat(currencyInput.replace(/[^0-9]/g, '') / 100).toFixed(2), // Converta para float com 2 casas decimais
             'user_id': '2'
         }
 
         apiService.postSpents(data)
-        .then((response) => console.log(response))
+            .then((response) => {
+                CustomAlert.fire({
+                    title: response.data.title,
+                    icon: response.data.status
+                })
+             handleClose()
+             setTimeout(() => {
+                    window.location.reload();
+                }, 3000)
+         });
+
+
     }
 
     return (
