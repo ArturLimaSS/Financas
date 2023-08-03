@@ -8,7 +8,6 @@ export const LastSpents = () => {
     useEffect(() => {
         apiService.getSpents()
             .then((response) => {
-                console.log(response.data);
                 const spentsWithNumbers = response.data.map(spent => ({
                     ...spent,
                     value: parseFloat(spent.value)

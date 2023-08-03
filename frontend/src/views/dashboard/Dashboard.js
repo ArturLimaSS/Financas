@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
-      
+
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={8}>
@@ -32,9 +32,6 @@ const Dashboard = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <YearlyBreakup />
-              </Grid>
-              <Grid item xs={12}>
-                <MonthlyEarnings />
               </Grid>
             </Grid>
           </Grid>

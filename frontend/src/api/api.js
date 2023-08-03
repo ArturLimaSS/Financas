@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const apiSelic = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=json&dataInicial={01/01/2023}&dataFinal={02/08/2023}";
+
 const instance = axios.create({
     baseURL: "http://127.0.0.1:8000/api"
 })
