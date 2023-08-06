@@ -26,7 +26,7 @@ const modalStyle = {
 
 const CustomAlert = withReactContent(Swal);
 
-export default function NewSpentModal() {
+export default function NewSpentModal({ onFormSubmit  }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -67,11 +67,12 @@ export default function NewSpentModal() {
                     title: response.data.title,
                     icon: response.data.status
                 })
-             handleClose()
-             setTimeout(() => {
-                    window.location.reload();
+                handleClose()
+                setTimeout(() => {
+                    onFormSubmit();
+                    //window.location.reload();
                 }, 3000)
-         });
+            });
 
 
     }

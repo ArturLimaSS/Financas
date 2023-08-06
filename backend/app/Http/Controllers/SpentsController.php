@@ -18,7 +18,8 @@ class SpentsController extends Controller
             // A consulta abaixo está usando Eloquent para realizar a junção (join) entre as tabelas.
             $spentsWithProducts = SpentsModel::leftJoin('tb_spent_products', 'tb_spents.id', '=', 'tb_spent_products.spent')
                 ->leftJoin('tb_products', 'tb_spent_products.product', '=', 'tb_products.id')
-                ->select('tb_spents.title', 'tb_spents.reason', 'tb_spents.value', 'tb_products.name as products')
+                ->select('tb_spents.title', 'tb_spents.reason', 'tb_spents.value', 'tb_spents.created_at', 'tb_products.name as products')
+                ->orderByRaw('tb_spents.id DESC')
                 ->get();
 
             return response()->json($spentsWithProducts);

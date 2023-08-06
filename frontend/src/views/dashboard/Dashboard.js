@@ -11,7 +11,7 @@ import Blog from './components/Blog';
 import MonthlyEarnings from './components/MonthlyEarnings';
 import { LastSpents } from './components/LastSpents';
 import NewSpentModal from './components/NewSpentModal';
-
+import SelicEarn from './components/SelicEarn';
 const Dashboard = () => {
 
   const [updateRecentTransactions, setUpdateRecentTransactions] = useState(false);
@@ -22,16 +22,20 @@ const Dashboard = () => {
 
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
-
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={8}>
             <SalesOverview />
           </Grid>
-          <Grid item xs={12} lg={4}>
+          <Grid spacing={3} item xs={12} lg={4}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <YearlyBreakup />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <SelicEarn />
               </Grid>
             </Grid>
           </Grid>

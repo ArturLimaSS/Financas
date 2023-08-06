@@ -1,11 +1,22 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpentsController;
 use App\Http\Controllers\UserController;
 // query builder -- pesquisar
+
+//Auth Routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:api')->group(function(){
+    route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', function(Request $request){
+        return $request->user();
+    });
+});
+
 //User Routes
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);

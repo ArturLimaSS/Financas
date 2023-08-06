@@ -15,6 +15,7 @@ class SpentsModel extends Model
         'value',
         'reason',
         'products',
+        'created_at',
         'user_id',
         'status',
     ];

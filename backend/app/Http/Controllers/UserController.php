@@ -38,7 +38,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        return response()->json(['message' => 'Usuário criado com sucesso!', 'data' => $user], 201);
+        return response()->json(['message' => 'Usuário criado com sucesso!', 'status' => 'success',  'data' => $user], 201);
     }
 
     public function storeBulk(Request $request)

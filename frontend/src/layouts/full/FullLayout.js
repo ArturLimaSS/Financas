@@ -26,7 +26,11 @@ const FullLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   // const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
-
+  const handleFormSubmit = () => {
+    // Esta função será chamada quando o formulário for submetido no componente Dashboard
+    // Coloque aqui a lógica de atualização que você precisa
+    console.log("Formulário submetido no FullLayout");
+  };
   return (
     <MainWrapper
       className='mainwrapper'

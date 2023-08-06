@@ -17,6 +17,8 @@ export const LastSpents = () => {
             .catch((error) => console.error(error));
     }, [])
 
+
+
     return (
         <DashboardCard title={"Ultimos Gastos"}>
             <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' } }}>
@@ -43,6 +45,11 @@ export const LastSpents = () => {
                                     Total Gasto
                                 </Typography>
                             </TableCell>
+                            <TableCell>
+                                <Typography>
+                                    Data
+                                </Typography>
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -66,6 +73,15 @@ export const LastSpents = () => {
                                 <TableCell>
                                     <Typography>
                                         {spent.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell>
+                                    <Typography>
+                                        {new Intl.DateTimeFormat('pt-BR', {
+                                            year: 'numeric',
+                                            month: '2-digit',
+                                            day: '2-digit'
+                                        }).format(new Date(spent.created_at))}
                                     </Typography>
                                 </TableCell>
                             </TableRow>

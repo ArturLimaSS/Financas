@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Box, Card, Stack, Typography } from '@mui/material';
 
 // components
 import PageContainer from 'src/components/container/PageContainer';
 import Logo from 'src/layouts/full/shared/logo/Logo';
-import AuthLogin from './auth/AuthLogin';
+import { AuthLogin } from './auth/AuthLogin';
 
 const Login2 = () => {
-  
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <PageContainer title="Login" description="this is Login page">
       <Box
@@ -41,12 +42,12 @@ const Login2 = () => {
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
               </Box>
-              <AuthLogin
-                
+              <AuthLogin 
+                setLoggedIn={setLoggedIn}                
                 subtitle={
                   <Stack direction="row" spacing={1} justifyContent="center" mt={3}>
                     <Typography color="textSecondary" variant="h6" fontWeight="500">
-                      New to Modernize?
+                      Ainda não possui uma conta?
                     </Typography>
                     <Typography
                       component={Link}
@@ -57,7 +58,7 @@ const Login2 = () => {
                         color: 'primary.main',
                       }}
                     >
-                      Create an account
+                      Criar uma conta
                     </Typography>
                   </Stack>
                 }

@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import PageContainer from 'src/components/container/PageContainer';
 import Logo from 'src/layouts/full/shared/logo/Logo';
 import AuthRegister from './auth/AuthRegister';
+import { apiService } from 'src/api/api';
 
 const Register2 = () => (
+
   <PageContainer title="Register" description="this is Register page">
     <Box
       sx={{
@@ -37,26 +39,24 @@ const Register2 = () => (
             <Box display="flex" alignItems="center" justifyContent="center">
               <Logo />
             </Box>
-            <AuthRegister
-              
-              subtitle={
-                <Stack direction="row" justifyContent="center" spacing={1} mt={3}>
-                  <Typography color="textSecondary" variant="h6" fontWeight="400">
-                    Already have an Account?
-                  </Typography>
-                  <Typography 
-                    component={Link}
-                    to="/auth/login"
-                    fontWeight="500"
-                    sx={{
-                      textDecoration: 'none',
-                      color: 'primary.main',
-                    }}
-                  >
-                    Sign In
-                  </Typography>
-                </Stack>
-              }
+            <AuthRegister subtitle={
+              <Stack direction="row" justifyContent="center" spacing={1} mt={3}>
+                <Typography color="textSecondary" variant="h6" fontWeight="400">
+                  Já possui uma conta?
+                </Typography>
+                <Typography
+                  component={Link}
+                  to="/auth/login"
+                  fontWeight="500"
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'primary.main',
+                  }}
+                >
+                  Entrar
+                </Typography>
+              </Stack>
+            }
             />
           </Card>
         </Grid>

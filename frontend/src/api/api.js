@@ -15,6 +15,14 @@ export const apiService = {
         return instance.get('/user/1');
     },
 
+    createUser: (data) => {
+        return instance.post('/users', data)
+    },
+
+    login: (data) => {
+        return instance.post('/login', data);
+    },
+
     getSpents: () => {
         return instance.get('/spents');
     },
