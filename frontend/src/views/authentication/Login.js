@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Grid, Box, Card, Stack, Typography } from '@mui/material';
 
 // components
@@ -9,6 +9,10 @@ import { AuthLogin } from './auth/AuthLogin';
 
 const Login2 = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  if(localStorage.getItem('user_id') > 0){
+    navigate('/dashboard');
+  }
 
   return (
     <PageContainer title="Login" description="this is Login page">

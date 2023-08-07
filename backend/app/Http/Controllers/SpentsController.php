@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class SpentsController extends Controller
 {
-    public function index()
+    public function index($user_id)
     {
         $spentsmodel = new SpentsModel();
         try {
@@ -19,6 +19,7 @@ class SpentsController extends Controller
             $spentsWithProducts = SpentsModel::leftJoin('tb_spent_products', 'tb_spents.id', '=', 'tb_spent_products.spent')
                 ->leftJoin('tb_products', 'tb_spent_products.product', '=', 'tb_products.id')
                 ->select('tb_spents.title', 'tb_spents.reason', 'tb_spents.value', 'tb_spents.created_at', 'tb_products.name as products')
+                ->orWhere("tb_spents.user_id", '=', $user_id)
                 ->orderByRaw('tb_spents.id DESC')
                 ->get();
 
@@ -65,13 +66,14 @@ class SpentsController extends Controller
         return response()->json($spent);
     }
 
-    public function getDataToChart()
+    public function getDataToChart($user_id)
     {
         $results = SpentsModel::selectRaw('DATE(created_at) AS date_only, SUM(VALUE) AS total_spents')
-                ->groupBy('date_only')
-                ->orderBy('date_only', 'DESC')
-                ->limit('5')
-                ->get();
+            ->where('tb_spents.user_id', '=', $user_id)
+            ->groupBy('date_only')
+            ->orderBy('date_only', 'DESC')
+            ->limit('5')
+            ->get();
         return response()->json($results);
     }
 }

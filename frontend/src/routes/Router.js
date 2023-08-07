@@ -17,12 +17,14 @@ const Register = Loadable(lazy(() => import('../views/authentication/Register'))
 const Login = Loadable(lazy(() => import('../views/authentication/Login')));
 const User = Loadable(lazy(() => import ('../views/user/User')));
 
+const logedIn = localStorage.getItem('user_id') > 0 ? '/dashboard' : '/auth/login';
+
 const Router = [
   {
     path: '/',
     element: <FullLayout />,
     children: [
-      { path: '/', element: <Navigate to="/auth/login" /> },
+      { path: '/', element: <Navigate to={logedIn} /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
       { path: '/sample-page', exact: true, element: <SamplePage /> },
       { path: '/user', exact: true, element: <User /> },

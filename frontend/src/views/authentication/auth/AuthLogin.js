@@ -8,15 +8,19 @@ import {
     Stack,
     Checkbox
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { apiService } from 'src/api/api';
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 export const AuthLogin = ({ setLoggedIn, title, subtitle, subtext }) => {
-    const MySwal = withReactContent(Swal);
+    const navigate = useNavigate();
+    if (localStorage.getItem('user_id') > 0) {
+        navigate('/dashboard');
+    }
 
+    const MySwal = withReactContent(Swal);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -32,9 +36,11 @@ export const AuthLogin = ({ setLoggedIn, title, subtitle, subtext }) => {
                         text: response.data.text
                     })
                     const token = response.data.token;
+                    const user_id = response.data.user_id;
                     localStorage.setItem('authToken', token);
+                    localStorage.setItem('user_id', user_id)
                     console.log(token);
-                    setLoggedIn(true); 
+                    setLoggedIn(true);
                 });
         } catch (error) {
             console.error('Erro ao fazer login', error);

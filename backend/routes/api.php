@@ -25,11 +25,11 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 
 //Spents Routes
-Route::get('/spents', [SpentsController::class, 'index']);
+Route::get('/spents/{user_id}', [SpentsController::class, 'index']);
 Route::get('/spents/spent/{id}', [SpentsController::class, 'show']);
 Route::post('/spents/create', [SpentsController::class, 'store']);
 Route::post('/spents/update/{spent}', [SpentsController::class, 'update']);
-Route::get('/spents/date', [SpentsController::class, 'getDataToChart']);
+Route::get('/spents/date/{user_id}', [SpentsController::class, 'getDataToChart']);
 
 //Products RoutesQ
 Route::get('/products', [ProductsController::class, 'index']);

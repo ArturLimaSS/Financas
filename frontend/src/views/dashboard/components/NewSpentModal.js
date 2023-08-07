@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { apiService } from 'src/api/api';
-
+import { userId } from './UserId';
 const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -58,7 +58,7 @@ export default function NewSpentModal({ onFormSubmit  }) {
             'title': event.target[0].value,
             'reason': event.target[2].value,
             'value': parseFloat(currencyInput.replace(/[^0-9]/g, '') / 100).toFixed(2), // Converta para float com 2 casas decimais
-            'user_id': '2'
+            'user_id': userId()
         }
 
         apiService.postSpents(data)

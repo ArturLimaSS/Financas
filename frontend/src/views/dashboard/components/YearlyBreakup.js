@@ -4,14 +4,14 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import { IconArrowUpLeft } from '@tabler/icons';
 import { apiService } from 'src/api/api';
-
+import { userId } from './UserId';
 import DashboardCard from '../../../components/shared/DashboardCard';
 
 const YearlyBreakup = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    apiService.getSpents()
+    apiService.getSpents(userId())
       .then((response) => {
         console.log(response.data)
         const totalSpents = response.data.reduce((acc, curr) => acc + parseFloat(curr.value), 0);

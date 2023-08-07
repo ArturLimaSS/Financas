@@ -4,13 +4,13 @@ import { useTheme } from '@mui/material/styles';
 import DashboardCard from '../../../components/shared/DashboardCard';
 import Chart from 'react-apexcharts';
 import { apiService } from 'src/api/api';
-
+import { userId } from './UserId';
 
 const SalesOverview = () => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        apiService.getDataToChart()
+        apiService.getDataToChart(userId())
             .then((response) => {
                 setData(response.data);
             })

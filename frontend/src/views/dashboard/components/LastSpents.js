@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { apiService } from "src/api/api";
 import { Table, TableHead, TableBody, Typography, TableRow, Chip, TableCell, Box } from "@mui/material";
 import DashboardCard from "src/components/shared/DashboardCard";
-
+import { userId } from "./UserId";
 export const LastSpents = () => {
+
     const [spents, setSpents] = useState([]);
     useEffect(() => {
-        apiService.getSpents()
+        apiService.getSpents(userId())
             .then((response) => {
                 const spentsWithNumbers = response.data.map(spent => ({
                     ...spent,

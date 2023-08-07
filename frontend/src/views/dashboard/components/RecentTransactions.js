@@ -12,7 +12,7 @@ import {
 } from '@mui/lab';
 import { Link, Typography } from '@mui/material';
 import { apiService } from 'src/api/api';
-
+import { userId } from './UserId';
 
 const RecentTransactions = ({ update }) => {
 
@@ -20,10 +20,9 @@ const RecentTransactions = ({ update }) => {
 
   useEffect(() => {
     if (update) {
-      // Se a prop "update" for true, faça a requisição para obter os gastos recentes
-      apiService.getSpents()
+      apiService.getSpents(userId())
         .then((response) => {
-          console.log("Dados da API:", response.data); // Verifique os dados retornados pela API
+          console.log("Dados da API:", response.data); 
           setSpents(response.data);
         })
         .catch((error) => console.error("Erro", error))
